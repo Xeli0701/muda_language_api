@@ -5,7 +5,7 @@ def Muda_language_execute(muda_code):
 def Muda_language2BrainFxck_code(muda_code):
     """
     無駄言語の変換処理
-    #Muda_language to BrainFxck_code
+    Muda_language to BrainFxck_code
 
     DocTest
     >>> Muda_language2BrainFxck_code("むだむだむだむだむだむだむだむだ、mudaむだむだむだむだ、mudaむだむだmudaむだむだむだmudaむだむだむだmudaむだMUDAMUDAMUDAMUDA無駄。mudaむだmudaむだmuda無駄mudamudaむだ、MUDA。MUDA無駄。mudamudaムダmuda無駄無駄無駄ムダむだむだむだむだむだむだむだムダムダむだむだむだムダmudamudaムダMUDA無駄ムダMUDAムダむだむだむだムダ無駄無駄無駄無駄無駄無駄ムダ無駄無駄無駄無駄無駄無駄無駄無駄ムダmudamudaむだムダmudaむだむだムダ")
@@ -21,6 +21,22 @@ def Muda_language2BrainFxck_code(muda_code):
     code      = code_temp.replace("。","]")
 
     return code
+
+def BrainFxck_code2Muda_language(code):
+    """
+    無駄言語の変換処理
+    BrainFxck_code to Muda_language
+    """
+    code_temp = code.replace(">","muda")
+    code_temp = code_temp.replace("<","MUDA")
+    code_temp = code_temp.replace(".","ムダ")
+    code_temp = code_temp.replace("+","むだ")
+    code_temp = code_temp.replace("-","無駄")
+    code_temp = code_temp.replace(",","ﾑﾀﾞ")
+    code_temp = code_temp.replace("[","、")
+    muda_code = code_temp.replace("]","。")
+
+    return muda_code
 
 def pyBrainFxck(code):
     """
@@ -99,6 +115,7 @@ if __name__ == '__main__':
     むだむだむだむだむだむだむだむだ、mudaむだむだむだむだ、mudaむだむだmudaむだむだむだmudaむだむだむだmudaむだMUDAMUDAMUDAMUDA無駄。mudaむだmudaむだmuda無駄mudamudaむだ、MUDA。MUDA無駄。mudamuda
     ムダmuda無駄無駄無駄ムダむだむだむだむだむだむだむだムダムダむだむだむだムダmudamudaムダMUDA無駄ムダMUDAムダむだむだむだムダ無駄無駄無駄無駄無駄無駄ムダ無駄無駄無駄無駄無駄無駄無駄無駄ムダmudamudaむだムダmudaむだむだムダ
     """
+    print(BrainFxck_code2Muda_language("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.+.+.>++++++++++."))
     print(Muda_language_execute(muda_code))
     import doctest
     doctest.testmod()
