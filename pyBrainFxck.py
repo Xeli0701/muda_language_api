@@ -1,14 +1,22 @@
-def Muda_language_execute(muda_code):
-    code = Muda_language2BrainFxck_code(muda_code)
-    return pyBrainFxck(code)
+def execute(original_code):
+    """
+    無駄言語・オラ言語の実行
 
-def Muda_language2BrainFxck_code(muda_code):
+    DocTest
+    >>> execute("むだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだおらおらおらおらおらおらおらおらおらおらおらおらおらおらオラおらオラおらオラoraおらおらおらおらおらおらおらおらおらおらオラ")
+    'ABC\\n'
+    """
+    code = Muda2Bf(original_code)
+    code = Ora2Bf(code)
+    return BfCompiler(code)
+
+def Muda2Bf(muda_code):
     """
     無駄言語の変換処理
     Muda_language to BrainFxck_code
 
     DocTest
-    >>> Muda_language2BrainFxck_code("むだむだむだむだむだむだむだむだ、mudaむだむだむだむだ、mudaむだむだmudaむだむだむだmudaむだむだむだmudaむだMUDAMUDAMUDAMUDA無駄。mudaむだmudaむだmuda無駄mudamudaむだ、MUDA。MUDA無駄。mudamudaムダmuda無駄無駄無駄ムダむだむだむだむだむだむだむだムダムダむだむだむだムダmudamudaムダMUDA無駄ムダMUDAムダむだむだむだムダ無駄無駄無駄無駄無駄無駄ムダ無駄無駄無駄無駄無駄無駄無駄無駄ムダmudamudaむだムダmudaむだむだムダ")
+    >>> Muda2Bf("むだむだむだむだむだむだむだむだ、mudaむだむだむだむだ、mudaむだむだmudaむだむだむだmudaむだむだむだmudaむだMUDAMUDAMUDAMUDA無駄。mudaむだmudaむだmuda無駄mudamudaむだ、MUDA。MUDA無駄。mudamudaムダmuda無駄無駄無駄ムダむだむだむだむだむだむだむだムダムダむだむだむだムダmudamudaムダMUDA無駄ムダMUDAムダむだむだむだムダ無駄無駄無駄無駄無駄無駄ムダ無駄無駄無駄無駄無駄無駄無駄無駄ムダmudamudaむだムダmudaむだむだムダ")
     '++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.'
     """
     code_temp = muda_code.replace("muda",">")
@@ -22,7 +30,23 @@ def Muda_language2BrainFxck_code(muda_code):
 
     return code
 
-def BrainFxck_code2Muda_language(code):
+def Ora2Bf(muda_code):
+    """
+    オラ言語の変換処理
+    Ora_language to BrainFxck_code
+    """
+    code_temp = muda_code.replace("ora",">")
+    code_temp = code_temp.replace("ORA","<")
+    code_temp = code_temp.replace("オラ",".")
+    code_temp = code_temp.replace("おら","+")
+    code_temp = code_temp.replace("折羅","-")
+    code_temp = code_temp.replace("ｵﾗ",",")
+    code_temp = code_temp.replace("、","[")
+    code      = code_temp.replace("。","]")
+
+    return code
+
+def Bf2Muda(code):
     """
     無駄言語の変換処理
     BrainFxck_code to Muda_language
@@ -38,7 +62,23 @@ def BrainFxck_code2Muda_language(code):
 
     return muda_code
 
-def pyBrainFxck(code):
+def Bf2Ora(code):
+    """
+    無駄言語の変換処理
+    BrainFxck_code to Muda_language
+    """
+    code_temp = code.replace(">","ora")
+    code_temp = code_temp.replace("<","ORA")
+    code_temp = code_temp.replace(".","オラ")
+    code_temp = code_temp.replace("+","おら")
+    code_temp = code_temp.replace("-","折羅")
+    code_temp = code_temp.replace(",","ｵﾗ")
+    code_temp = code_temp.replace("[","、")
+    muda_code = code_temp.replace("]","。")
+
+    return muda_code
+
+def BfCompiler(code):
     """
     Python上でBrainFxckを実行するコンパイラ
     入れられたcodeを処理し、その結果出力される文章を返却する。
@@ -55,9 +95,9 @@ def pyBrainFxck(code):
     →これらの分岐が終わったらプログラムカウンタをインクリメント
 
     DocTest
-    >>> pyBrainFxck("++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.")
+    >>> BfCompiler("++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.")
     'Hello World!\\n'
-    >>> pyBrainFxck("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.+.+.>++++++++++.")
+    >>> BfCompiler("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.+.+.>++++++++++.")
     'ABC\\n'
     """
     #メモリポインタ・プログラムカウンタ・メモリ定義
@@ -115,7 +155,19 @@ if __name__ == '__main__':
     むだむだむだむだむだむだむだむだ、mudaむだむだむだむだ、mudaむだむだmudaむだむだむだmudaむだむだむだmudaむだMUDAMUDAMUDAMUDA無駄。mudaむだmudaむだmuda無駄mudamudaむだ、MUDA。MUDA無駄。mudamuda
     ムダmuda無駄無駄無駄ムダむだむだむだむだむだむだむだムダムダむだむだむだムダmudamudaムダMUDA無駄ムダMUDAムダむだむだむだムダ無駄無駄無駄無駄無駄無駄ムダ無駄無駄無駄無駄無駄無駄無駄無駄ムダmudamudaむだムダmudaむだむだムダ
     """
-    print(BrainFxck_code2Muda_language("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.+.+.>++++++++++."))
-    print(Muda_language_execute(muda_code))
+    ora_code = """
+    おらおらおらおらおらおらおらおらおらおらおらおらおらおらおらおらおらおらおらおらおらおらおらおらおらおらおらおらおらおらおらおらおらおらおらおらおらおらおらおらおらおらおらおらおらおらおらおらおらおらおら
+おらおらおらおらおらおらおらおらおらおらおらおらおらおらオラおらオラおらオラoraおらおらおらおらおらおらおらおらおらおらオラ
+    """
+
+    muda_ora_code = """
+    むだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだむだおらおらおらおらおらおらおらおらおらおらおらおらおらおらオラおらオラおらオラoraおらおらおらおらおらおらおらおらおらおらオラ
+    """
+
+    print(Bf2Muda("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.+.+.>++++++++++."))
+    print(Bf2Ora("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.+.+.>++++++++++."))
+    print(execute(muda_code))
+    print(execute(ora_code))
+    print(execute(muda_ora_code))
     import doctest
     doctest.testmod()
