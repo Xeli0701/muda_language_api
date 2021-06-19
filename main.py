@@ -24,4 +24,4 @@ async def getNyanMessage(message):
     converted_message = Muda_language_execute(message)
     
     print(converted_message)
-    return {"message": converted_message}
+    return {"message": converted_message,"status":"success"}
