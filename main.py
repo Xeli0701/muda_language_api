@@ -24,4 +24,4 @@ async def getNyanMessage(message):
     converted_message = execute(message)
     
     print(converted_message)
-    return {"message": converted_message,"status":"success"}
+    return {"inputed":message,"message": converted_message,"status":"success"}
