@@ -20,8 +20,10 @@ app.add_middleware(
 @app.get("/muda/{message}")
 async def getNyanMessage(message):
     #無駄言語をコンパイルし、その結果を返す
-    message = urllib.parse.unquote(message)
-    converted_message = execute(message)
-    
-    print(converted_message)
-    return {"inputed":message,"message": converted_message,"status":"success"}
+    if message:
+        message = urllib.parse.unquote(message)
+        converted_message = execute(message)
+        print(converted_message)
+        return {"inputed":message,"message": converted_message,"status":"success"}
+    else:
+        return {"inputed":None, "message": None, "status":"empty_request"}
